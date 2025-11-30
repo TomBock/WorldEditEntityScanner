@@ -1,0 +1,14 @@
+name: WorldEditEntities
+version: '1.0'
+main: com.bocktom.worldEditEntities.WorldEditEntitiesPlugin
+api-version: '1.21'
+commands:
+  /countentities:
+    description: Count entities in the selected region.
+    usage: /countentities
+permissions:
+  worldeditentities.count:
+    description: Allows the use of /countentities command.
+    default: op
+depend:
+    - FastAsyncWorldEdit
