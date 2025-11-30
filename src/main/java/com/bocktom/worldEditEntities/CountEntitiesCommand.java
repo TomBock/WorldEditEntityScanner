@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Predicate;
 
 import static com.bocktom.worldEditEntities.FilterUtil.getFilter;
@@ -35,23 +36,25 @@ public class CountEntitiesCommand implements CommandExecutor, TabCompleter {
 		if(entityCounts.isEmpty()) {
 			player.sendMessage("§cNo entities found in the selected region or no region selected.");
 		} else {
-			player.sendMessage("§e" + entityCounts.total + " §6Entities in your selection:");
-			entityCounts.forEach((type, count) -> {
-				player.sendMessage("§a" + type.getName() + ": §e" + count);
-			});
+			//player.sendMessage("§e" + entityCounts.total + " §6Entities in your selection:");
+			//entityCounts.forEach((type, count) -> {
+			//	player.sendMessage("§a" + type.getName() + ": §e" + count);
+			//});
+			ChatUtil.sendTable(player, "Entities", entityCounts, type -> type.getName().replace("minecraft:", ""));
 		}
 
-
 		// Tile Entities
+
 		Predicate<TileState> blockFilter = getFilter(filterRaw, FilterUtil::getBlockFilter);
 		CountedMap<Material> blockCounts = WorldEditHelper.getBlockTypesInSelection(player, blockFilter);
 		if(blockCounts.isEmpty()) {
 			player.sendMessage("§cNo blocks found in the selected region or no region selected.");
 		} else {
-			player.sendMessage("§e" + blockCounts.total + " §6Tile Entities in your selection:");
-			blockCounts.forEach((material, count) -> {
-				player.sendMessage("§a" + material.name() + ": §e" + count);
-			});
+			ChatUtil.sendTable(player, "Tile Entities", blockCounts, type -> type.name().toLowerCase(Locale.ROOT));
+			//player.sendMessage("§e" + blockCounts.total + " §6Tile Entities in your selection:");
+			//blockCounts.forEach((material, count) -> {
+			//	player.sendMessage("§a" + material.name() + ": §e" + count);
+			//});
 		}
 
 
