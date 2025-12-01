@@ -22,13 +22,26 @@ public class FilterUtil {
 
 	public static @NotNull Predicate<String> getBlockFilter(String filterRaw) {
 		// Check for custom list
-		List<String> customList = Config.tileEntities.get.getStringList(filterRaw);
+		List<String> customList = Config.tileEntities.get.getStringList(filterRaw).stream()
+				.map(raw -> {
+					if(raw.contains(":")) {
+						return raw;
+					} else {
+						return "minecraft:" + raw;
+					}
+				}).toList();
+
 		if(!customList.isEmpty()) {
 			return customList::contains;
 		}
 
-		// Check for specific types
-		return id -> id.replace("minecraft:", "").equals(filterRaw);
+		if(filterRaw.contains(":")) {
+			// Check for namespaced ID
+			return id -> id.equals(filterRaw);
+		} else {
+			// Check for raw ID
+			return id -> id.replace("minecraft:", "").equals(filterRaw);
+		}
 	}
 
 	public static <T> Predicate<T> getFilter(String[] filters, Function<String, Predicate<T>> getFilterFunction) {

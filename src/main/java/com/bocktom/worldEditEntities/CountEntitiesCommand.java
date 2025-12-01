@@ -39,6 +39,9 @@ public class CountEntitiesCommand implements CommandExecutor, TabCompleter {
 		} else if(cmd.getName().equals("/countall")) {
 			countEntities(player, args);
 			countTileEntities(player, args);
+		} else if(cmd.getName().equals("/countstop")) {
+			AsyncWorldEditHelper.cancelBlockScanTask(player);
+			sender.sendMessage("§7Cancelled any ongoing block scan tasks.");
 		} else {
 			sender.sendMessage("Unknown command.");
 			return true;

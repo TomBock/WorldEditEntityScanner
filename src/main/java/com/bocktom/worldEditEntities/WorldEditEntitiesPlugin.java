@@ -16,6 +16,7 @@ public final class WorldEditEntitiesPlugin extends JavaPlugin {
 		getCommand("/countentities").setExecutor(new CountEntitiesCommand());
 		getCommand("/counttileentities").setExecutor(new CountEntitiesCommand());
 		getCommand("/countall").setExecutor(new CountEntitiesCommand());
+		getCommand("/countstop").setExecutor(new CountEntitiesCommand());
 	}
 
 }

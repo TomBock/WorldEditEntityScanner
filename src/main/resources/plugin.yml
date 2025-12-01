@@ -12,6 +12,9 @@ commands:
   /counttileentities:
     description: Count tile entities in the selected region.
     usage: /counttileentities
+  /countstop:
+    description: Stop the ongoing entity counting process.
+    usage: /countstop
 permissions:
   worldeditentities.count:
     description: Allows the use of /countentities command.

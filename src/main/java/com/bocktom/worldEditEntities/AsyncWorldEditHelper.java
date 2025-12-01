@@ -15,9 +15,11 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.function.Predicate;
 
 import static com.bocktom.worldEditEntities.WorldEditEntitiesPlugin.plugin;
@@ -25,6 +27,7 @@ import static com.bocktom.worldEditEntities.WorldEditEntitiesPlugin.plugin;
 public class AsyncWorldEditHelper {
 
 	private static final Map<UUID, Integer> blockScanTasks = new ConcurrentHashMap<>();
+	private static final Set<UUID> cancelledTasks = new ConcurrentSkipListSet<>();
 
 	public static CompletableFuture<CountedMap<EntityType>> countEntitiesAsync(Player player, Predicate<EntityType> filter) {
 		Region selection = getSelection(player);
@@ -71,6 +74,14 @@ public class AsyncWorldEditHelper {
 
 			long lastLogTime = System.currentTimeMillis();
 			for (BlockVector3 vec : selection) {
+				// Check for cancellation
+				if(cancelledTasks.contains(owner)) {
+					cancelledTasks.remove(owner);
+					future.complete(CountedMap.empty());
+					return;
+				}
+
+				// Check state
 				com.sk89q.worldedit.world.block.BlockState state = vec.getBlock(selection.getWorld());
 				String id = state.getBlockType().id();
 				if (filter.test(id)) {
@@ -84,6 +95,7 @@ public class AsyncWorldEditHelper {
 					Bukkit.getScheduler().runTask(plugin, () -> ChatUtil.sendProgress(player, "Scanning blocks", progress, finalCount, size));
 					lastLogTime = System.currentTimeMillis();
 				}
+
 				count++;
 			}
 
@@ -117,5 +129,14 @@ public class AsyncWorldEditHelper {
 		if(selection == null || selection.getWorld() == null)
 			return null;
 		return selection;
+	}
+
+	public static void cancelBlockScanTask(Player player) {
+		UUID owner = player.getUniqueId();
+		if(blockScanTasks.containsKey(owner)) {
+			Bukkit.getScheduler().cancelTask(blockScanTasks.get(owner));
+			blockScanTasks.remove(owner);
+			cancelledTasks.add(owner);
+		}
 	}
 }
