@@ -130,6 +130,10 @@ public class AsyncWorldEditHelper {
 				}
 			}
 		}
+		if(rangeArg > 1_200) {
+			player.sendMessage("§cRange capped to 1200 blocks.");
+			rangeArg = 1_200;
+		}
 		// Use own selection if no user specified
 		if (userArg == null || Bukkit.getPlayer(userArg) == null) {
 			return getSelection(player);
