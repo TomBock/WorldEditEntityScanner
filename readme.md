@@ -30,7 +30,7 @@ within a **specified range** of another user.
 ## Permissions:
 | Permission Node              | Description            | Default |
 |------------------------------|------------------------|---------|
-| `worldeditentityscanner.use` | Use chat quiz commands | op      |
+| `worldeditentityscanner.use` | Use commands           | op      |
 
 ## Requirements
 - Paper 1.21.*
