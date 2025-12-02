@@ -1,8 +1,8 @@
-package com.bocktom.worldEditEntities;
+package com.bocktom.worldeditentityscanner;
 
-import com.bocktom.worldEditEntities.util.ChatUtil;
-import com.bocktom.worldEditEntities.util.Config;
-import com.bocktom.worldEditEntities.util.FilterUtil;
+import com.bocktom.worldeditentityscanner.util.ChatUtil;
+import com.bocktom.worldeditentityscanner.util.Config;
+import com.bocktom.worldeditentityscanner.util.FilterUtil;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.world.entity.EntityType;
 import io.papermc.paper.registry.RegistryAccess;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
-import static com.bocktom.worldEditEntities.util.FilterUtil.collectFilters;
+import static com.bocktom.worldeditentityscanner.util.FilterUtil.collectFilters;
 
 public class CountEntitiesCommand implements CommandExecutor, TabCompleter {
 
@@ -32,13 +32,13 @@ public class CountEntitiesCommand implements CommandExecutor, TabCompleter {
 		}
 
 		switch (cmd.getName()) {
-			case "/countentities" -> count(player, args, true);
-			case "/counttileentities" -> count(player, args, false);
-			case "/countall" -> {
+			case "/scanentities" -> count(player, args, true);
+			case "/scantileentities" -> count(player, args, false);
+			case "/scanall" -> {
 				count(player, args, true);
 				count(player, args, false);
 			}
-			case "/countstop" -> {
+			case "/scanstop" -> {
 				AsyncWorldEditHelper.cancelBlockScanTask(player);
 				sender.sendMessage("§7Cancelled any ongoing block scan tasks.");
 			}
@@ -131,13 +131,13 @@ public class CountEntitiesCommand implements CommandExecutor, TabCompleter {
 		if(args.length > 0 && args[args.length - 1].startsWith("filter=")) {
 
 			switch (cmd.getName()) {
-				case "/countentities" -> {
+				case "/scanentities" -> {
 					completions.addAll(getEntityTypeCompletions(args));
 				}
-				case "/counttileentities" -> {
+				case "/scantileentities" -> {
 					completions.addAll(getTileEntityCompletions(args));
 				}
-				case "/countall" -> {
+				case "/scanall" -> {
 					completions.addAll(getEntityTypeCompletions(args));
 					completions.addAll(getTileEntityCompletions(args));
 				}

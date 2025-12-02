@@ -1,8 +1,7 @@
-package com.bocktom.worldEditEntities;
+package com.bocktom.worldeditentityscanner;
 
-import com.bocktom.worldEditEntities.util.ChatUtil;
-import com.bocktom.worldEditEntities.util.CountedMap;
-import com.sk89q.worldedit.EmptyClipboardException;
+import com.bocktom.worldeditentityscanner.util.ChatUtil;
+import com.bocktom.worldeditentityscanner.util.CountedMap;
 import com.sk89q.worldedit.IncompleteRegionException;
 import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.WorldEdit;
@@ -22,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.function.Predicate;
 
-import static com.bocktom.worldEditEntities.WorldEditEntitiesPlugin.plugin;
+import static com.bocktom.worldeditentityscanner.WorldEditEntityScannerPlugin.plugin;
 
 public class AsyncWorldEditHelper {
 

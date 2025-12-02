@@ -1,23 +1,28 @@
-name: WorldEditEntities
+name: WorldEditEntityScanner
 version: '1.0'
-main: com.bocktom.worldEditEntities.WorldEditEntitiesPlugin
+author: Tommm
+main: com.bocktom.worldeditentityscanner.WorldEditEntityScannerPlugin
 api-version: '1.21'
 commands:
-  /countentities:
+  /scanentities:
     description: Count entities in the selected region.
-    usage: /countentities
-  /countall:
-    description: Count all entities and tile entities in the world.
-    usage: /countall
-  /counttileentities:
+    usage: //scanentities
+    permission: worldeditentityscanner.use
+  /scantileentities:
     description: Count tile entities in the selected region.
-    usage: /counttileentities
-  /countstop:
+    usage: //scantileentities
+    permission: worldeditentityscanner.use
+  /scanall:
+    description: Count all entities and tile entities in the world.
+    usage: //scanall
+    permission: worldeditentityscanner.use
+  /scanstop:
     description: Stop the ongoing entity counting process.
-    usage: /countstop
+    usage: //scanstop
+    permission: worldeditentityscanner.use
 permissions:
-  worldeditentities.count:
-    description: Allows the use of /countentities command.
+  worldeditentityscanner.use:
+    description: Allows the use of all scan commands.
     default: op
 depend:
     - FastAsyncWorldEdit

@@ -1,4 +1,4 @@
-package com.bocktom.worldEditEntities.util;
+package com.bocktom.worldeditentityscanner.util;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

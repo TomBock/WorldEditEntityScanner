@@ -1,9 +1,8 @@
-package com.bocktom.worldEditEntities.util;
+package com.bocktom.worldeditentityscanner.util;
 
 import com.sk89q.worldedit.world.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Mob;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Locale;

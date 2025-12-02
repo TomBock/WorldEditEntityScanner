@@ -1,4 +1,4 @@
-package com.bocktom.worldEditEntities.util;
+package com.bocktom.worldeditentityscanner.util;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;

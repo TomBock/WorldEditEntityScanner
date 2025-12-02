@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.bocktom</groupId>
-    <artifactId>worldeditentities</artifactId>
+    <artifactId>worldeditentityscanner</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>worldeditentities</name>
+    <name>worldeditentityscanner</name>
 
     <properties>
         <java.version>21</java.version>
@@ -20,6 +20,7 @@
     </properties>
 
     <build>
+        <finalName>WorldEditEntityScanner</finalName>
         <defaultGoal>clean package</defaultGoal>
         <plugins>
             <plugin>
@@ -115,12 +116,6 @@
                     <groupId>*</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.42</version>
         </dependency>
     </dependencies>
 </project>
